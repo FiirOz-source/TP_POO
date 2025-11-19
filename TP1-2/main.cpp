@@ -93,5 +93,7 @@ int main()
     }
 
     std::cout << "We have: " << figure::get_nbr_figure() << " figures\n";
+
+    /* TEST QUEUE */
     return 0;
 }

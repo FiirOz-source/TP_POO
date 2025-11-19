@@ -184,3 +184,75 @@ std::string colorable::get_color()
 {
     return color;
 }
+
+cell::cell()
+{
+    previous_cell = nullptr;
+    next_cell = nullptr;
+}
+cell::cell(cell *next)
+{
+    previous_cell = nullptr;
+    next_cell = next;
+}
+
+queue::queue(cell *first, cell *last, int nbr)
+{
+    first_cell = first;
+    last_cell = last;
+    nbr_cell = nbr;
+}
+
+queue::~queue()
+{
+    for (int i = 0; i < nbr_cell; i++)
+    {
+        remove_cell();
+    }
+}
+
+void queue::add_cell(cell *c)
+{
+    last_cell->next_cell = c;
+    c->previous_cell = last_cell;
+    last_cell = c;
+    nbr_cell++;
+}
+void queue::remove_cell()
+{
+    if (last_cell->previous_cell == nullptr)
+    {
+        cell *t = last_cell;
+        last_cell = nullptr;
+        first_cell = nullptr;
+        free(t);
+    }
+    else
+    {
+        last_cell = last_cell->previous_cell;
+        free(last_cell->next_cell);
+        last_cell->next_cell = nullptr;
+        nbr_cell--;
+    }
+}
+
+int queue::is_queue_void(void)
+{
+    if (last_cell == nullptr)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int queue::get_nbr_cell()
+{
+    return nbr_cell;
+}
+
+cell *queue::get_queue_header()
+{
+    return first_cell;
+}

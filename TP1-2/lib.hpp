@@ -114,4 +114,35 @@ protected:
     float radius;
 };
 
+class cell
+{
+public:
+    cell();
+    cell(cell *next);
+
+private:
+    cell *next_cell;
+    cell *previous_cell;
+    friend class queue;
+};
+
+class queue
+{
+public:
+    queue() = default;
+    queue(cell *first, cell *last, int nbr);
+    ~queue();
+
+    void add_cell(cell *c);
+    void remove_cell();
+    int is_queue_void(void);
+    int get_nbr_cell();
+    cell *get_queue_header();
+
+private:
+    cell *first_cell;
+    cell *last_cell;
+    int nbr_cell;
+};
+
 #endif // LIB_HPP
