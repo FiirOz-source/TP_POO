@@ -4,7 +4,7 @@
 
 void print_perimeter(float perimeter)
 {
-    std::cout << "Perimeter = " << perimeter << "\n";
+    std::cout << "Perimeter = " << perimeter << "cm\n";
 }
 
 int main()
@@ -53,6 +53,20 @@ int main()
     et2.set_size(2.3);
     et2.show_size();
     perimeter = et2.perimeter();
+    print_perimeter(perimeter);
+
+    /* CIRCLE */
+    circle cr1;
+    cr1.print_characteristics();
+    cr1.set_radius(3.4);
+    cr1.show_radius();
+    perimeter = cr1.perimeter();
+    print_perimeter(perimeter);
+
+    circle cr2(4.1);
+    cr2.print_characteristics();
+    cr2.show_radius();
+    perimeter = cr2.perimeter();
     print_perimeter(perimeter);
 
     return 0;

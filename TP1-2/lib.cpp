@@ -120,3 +120,35 @@ float equilateral_triangle::perimeter()
 {
     return (3 * size);
 }
+
+/* CIRCLE */
+circle::~circle()
+{
+    // std::cout << "Destroyed circle\n";
+}
+
+circle::circle(float rad)
+{
+    radius = rad;
+}
+
+void circle::print_characteristics()
+{
+    std::cout << "Radius: " << radius << "\n";
+}
+
+void circle::set_radius(float rad)
+{
+    radius = rad;
+}
+
+void circle::show_radius(void)
+{
+    std::cout << "Circle radius: " << radius << "cm\n";
+}
+
+float circle::perimeter()
+{
+    double pi = 2 * acos(0.0);
+    return (2 * pi * radius);
+}

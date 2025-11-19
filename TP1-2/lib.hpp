@@ -70,4 +70,22 @@ protected:
     float size;
 };
 
+class circle : public figure
+{
+public:
+    circle() = default;
+    circle(float rad);
+    ~circle() override;
+
+    float perimeter() override;
+
+    void print_characteristics() override;
+
+    void set_radius(float rad);
+    void show_radius(void);
+
+protected:
+    float radius;
+};
+
 #endif // LIB_HPP
