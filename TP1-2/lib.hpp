@@ -2,20 +2,26 @@
 #define LIB_HPP
 
 #include <iostream>
+#include <string>
 
 class figure
 {
 public:
     virtual ~figure() = default;
+    figure();
     virtual float perimeter() = 0;
     virtual void print_characteristics() = 0;
+    static int get_nbr_figure() { return nbr_figure; };
+
+private:
+    static int nbr_figure;
 };
 
 class polygone : public figure
 {
 public:
     polygone() = default;
-    ~polygone() override;
+    ~polygone();
 
     void print_characteristics() override;
 
@@ -28,7 +34,7 @@ class rectangle : public polygone
 public:
     rectangle();
     rectangle(float len, float wid);
-    ~rectangle() override;
+    ~rectangle();
 
     float perimeter() override;
 
@@ -48,10 +54,17 @@ class square : public rectangle
 public:
     square();
     square(float size);
-    ~square() override;
+    ~square();
 
     void set_size(float len);
     void show_size(void);
+
+private:
+    void set_length(float len);
+    void show_length(void);
+
+    void set_width(float wid);
+    void show_width(void);
 };
 
 class equilateral_triangle : public polygone
@@ -59,7 +72,7 @@ class equilateral_triangle : public polygone
 public:
     equilateral_triangle();
     equilateral_triangle(float sz);
-    ~equilateral_triangle() override;
+    ~equilateral_triangle();
 
     float perimeter() override;
 
@@ -70,12 +83,25 @@ protected:
     float size;
 };
 
-class circle : public figure
+class colorable
+{
+protected:
+    std::string color;
+
+public:
+    colorable() = default;
+    colorable(std::string col);
+    std::string get_color();
+    void set_color(std::string col);
+};
+
+class circle : public figure, public colorable
 {
 public:
     circle() = default;
     circle(float rad);
-    ~circle() override;
+    circle(float rad, std::string col);
+    ~circle();
 
     float perimeter() override;
 

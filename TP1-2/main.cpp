@@ -73,10 +73,12 @@ int main()
     std::vector<std::unique_ptr<figure>> figures;
 
     figures.push_back(std::make_unique<square>(5.0f));
-    figures.push_back(std::make_unique<circle>(3.0f));
+    figures.push_back(std::make_unique<circle>(3.0f, "Blue"));
     figures.push_back(std::make_unique<equilateral_triangle>(6.0f));
 
+    figures.push_back(std::make_unique<circle>(3.0f, "Red"));
     figures.push_back(std::make_unique<rectangle>(4.0f, 7.0f));
+    figures.push_back(std::make_unique<circle>(3.0f, "Green"));
     figures.push_back(std::make_unique<square>(10.0f));
 
     std::cout << "=== PRINTING FIGURES ===\n\n";
@@ -90,5 +92,6 @@ int main()
         std::cout << std::string(40, '-') << "\n";
     }
 
+    std::cout << "We have: " << figure::get_nbr_figure() << " figures\n";
     return 0;
 }

@@ -1,6 +1,16 @@
 #include "lib.hpp"
 #include <iostream>
 
+int figure::nbr_figure = 0;
+
+/* FIGURE */
+figure::figure()
+{
+    std::cout << "Created figure\n";
+    nbr_figure++;
+    std::cout << "Nbr figures : " << nbr_figure << "\n";
+}
+
 /* POLYGONE */
 polygone::~polygone()
 {
@@ -24,7 +34,7 @@ rectangle::rectangle(float len, float wid)
     nb_sides = 4;
     length = len;
     width = wid;
-    std::cout << "Created rectangle with length = " << len << "and width =" << wid << "\n";
+    std::cout << "Created rectangle with length = " << len << " and width = " << wid << "\n";
 }
 
 rectangle::~rectangle()
@@ -132,6 +142,12 @@ circle::circle(float rad)
     radius = rad;
 }
 
+circle::circle(float rad, std::string col)
+{
+    radius = rad;
+    color = col;
+}
+
 void circle::print_characteristics()
 {
     std::cout << "Radius: " << radius << "\n";
@@ -151,4 +167,20 @@ float circle::perimeter()
 {
     double pi = 2 * acos(0.0);
     return (2 * pi * radius);
+}
+
+/* COLORABLE */
+colorable::colorable(std::string col)
+{
+    color = col;
+}
+
+void colorable::set_color(std::string col)
+{
+    color = col;
+}
+
+std::string colorable::get_color()
+{
+    return color;
 }
