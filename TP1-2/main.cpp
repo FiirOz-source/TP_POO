@@ -10,64 +10,85 @@ void print_perimeter(float perimeter)
 int main()
 {
     std::cout << "=== Starting Test Session ===\n\n";
-    /* RECTANGLES */
-    rectangle rec1(3, 2);
-    rec1.print_characteristics();
-    rec1.show_length();
-    rec1.show_width();
-    float perimeter = rec1.perimeter();
-    print_perimeter(perimeter);
+    // /* RECTANGLES */
+    // rectangle rec1(3, 2);
+    // rec1.print_characteristics();
+    // rec1.show_length();
+    // rec1.show_width();
+    // float perimeter = rec1.perimeter();
+    // print_perimeter(perimeter);
 
-    rectangle rec2;
-    rec2.print_characteristics();
-    rec2.set_length(5.3);
-    rec2.show_length();
-    rec2.set_width(2.2);
-    rec2.show_width();
-    perimeter = rec2.perimeter();
-    print_perimeter(perimeter);
+    // rectangle rec2;
+    // rec2.print_characteristics();
+    // rec2.set_length(5.3f);
+    // rec2.show_length();
+    // rec2.set_width(2.2f);
+    // rec2.show_width();
+    // perimeter = rec2.perimeter();
+    // print_perimeter(perimeter);
 
-    /* SQUARES */
-    square sq1(4.1);
-    sq1.print_characteristics();
-    sq1.show_size();
-    perimeter = sq1.perimeter();
-    print_perimeter(perimeter);
+    // /* SQUARES */
+    // square sq1(4.1f);
+    // sq1.print_characteristics();
+    // sq1.show_size();
+    // perimeter = sq1.perimeter();
+    // print_perimeter(perimeter);
 
-    square sq2;
-    sq2.print_characteristics();
-    sq2.set_size(2.3);
-    sq2.show_size();
-    perimeter = sq2.perimeter();
-    print_perimeter(perimeter);
+    // square sq2;
+    // sq2.print_characteristics();
+    // sq2.set_size(2.3f);
+    // sq2.show_size();
+    // perimeter = sq2.perimeter();
+    // print_perimeter(perimeter);
 
-    /* EQUILATERAL TRIANGLE */
-    equilateral_triangle et1(3.2);
-    et1.print_characteristics();
-    et1.show_size();
-    perimeter = et1.perimeter();
-    print_perimeter(perimeter);
+    // /* EQUILATERAL TRIANGLE */
+    // equilateral_triangle et1(3.2f);
+    // et1.print_characteristics();
+    // et1.show_size();
+    // perimeter = et1.perimeter();
+    // print_perimeter(perimeter);
 
-    equilateral_triangle et2;
-    et2.print_characteristics();
-    et2.set_size(2.3);
-    et2.show_size();
-    perimeter = et2.perimeter();
-    print_perimeter(perimeter);
+    // equilateral_triangle et2;
+    // et2.print_characteristics();
+    // et2.set_size(2.3f);
+    // et2.show_size();
+    // perimeter = et2.perimeter();
+    // print_perimeter(perimeter);
 
-    /* CIRCLE */
-    circle cr1;
-    cr1.print_characteristics();
-    cr1.set_radius(3.4);
-    cr1.show_radius();
-    perimeter = cr1.perimeter();
-    print_perimeter(perimeter);
+    // /* CIRCLE */
+    // circle cr1;
+    // cr1.print_characteristics();
+    // cr1.set_radius(3.4f);
+    // cr1.show_radius();
+    // perimeter = cr1.perimeter();
+    // print_perimeter(perimeter);
 
-    circle cr2(4.1);
-    cr2.print_characteristics();
-    cr2.show_radius();
-    perimeter = cr2.perimeter();
-    print_perimeter(perimeter);
+    // circle cr2(4.1f);
+    // cr2.print_characteristics();
+    // cr2.show_radius();
+    // perimeter = cr2.perimeter();
+    // print_perimeter(perimeter);
+
+    /* FIGURE ARRAY */
+    std::vector<std::unique_ptr<figure>> figures;
+
+    figures.push_back(std::make_unique<square>(5.0f));
+    figures.push_back(std::make_unique<circle>(3.0f));
+    figures.push_back(std::make_unique<equilateral_triangle>(6.0f));
+
+    figures.push_back(std::make_unique<rectangle>(4.0f, 7.0f));
+    figures.push_back(std::make_unique<square>(10.0f));
+
+    std::cout << "=== PRINTING FIGURES ===\n\n";
+
+    float perimeter;
+    for (const auto &fig : figures)
+    {
+        fig->print_characteristics();
+        perimeter = fig->perimeter();
+        print_perimeter(perimeter);
+        std::cout << std::string(40, '-') << "\n";
+    }
 
     return 0;
 }
