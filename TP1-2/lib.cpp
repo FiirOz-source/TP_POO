@@ -86,3 +86,37 @@ void square::show_size(void)
 {
     std::cout << "Square size: " << length << "cm\n";
 }
+
+/* EQUILATERAL TRIANGLE */
+equilateral_triangle::equilateral_triangle()
+{
+    nb_sides = 3;
+    std::cout << "Created rectangle\n";
+}
+
+equilateral_triangle::equilateral_triangle(float sz)
+{
+    nb_sides = 4;
+    size = sz;
+    std::cout << "Created rectangle with length = " << size << "\n";
+}
+
+equilateral_triangle::~equilateral_triangle()
+{
+    // std::cout << "Destroyed equilateral_triangle\n";
+}
+
+void equilateral_triangle::set_size(float sz)
+{
+    size = sz;
+}
+
+void equilateral_triangle::show_size(void)
+{
+    std::cout << "Equilateral Triangle size: " << size << "cm\n";
+}
+
+float equilateral_triangle::perimeter()
+{
+    return (3 * size);
+}

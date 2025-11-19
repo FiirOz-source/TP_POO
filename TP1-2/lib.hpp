@@ -52,8 +52,22 @@ public:
 
     void set_size(float len);
     void show_size(void);
+};
 
-private:
+class equilateral_triangle : public polygone
+{
+public:
+    equilateral_triangle();
+    equilateral_triangle(float sz);
+    ~equilateral_triangle() override;
+
+    float perimeter() override;
+
+    void set_size(float sz);
+    void show_size(void);
+
+protected:
+    float size;
 };
 
 #endif // LIB_HPP

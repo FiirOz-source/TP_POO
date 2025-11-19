@@ -27,7 +27,7 @@ int main()
     perimeter = rec2.perimeter();
     print_perimeter(perimeter);
 
-    /* SQUARES*/
+    /* SQUARES */
     square sq1(4.1);
     sq1.print_characteristics();
     sq1.show_size();
@@ -39,6 +39,20 @@ int main()
     sq2.set_size(2.3);
     sq2.show_size();
     perimeter = sq2.perimeter();
+    print_perimeter(perimeter);
+
+    /* EQUILATERAL TRIANGLE */
+    equilateral_triangle et1(3.2);
+    et1.print_characteristics();
+    et1.show_size();
+    perimeter = et1.perimeter();
+    print_perimeter(perimeter);
+
+    equilateral_triangle et2;
+    et2.print_characteristics();
+    et2.set_size(2.3);
+    et2.show_size();
+    perimeter = et2.perimeter();
     print_perimeter(perimeter);
 
     return 0;
