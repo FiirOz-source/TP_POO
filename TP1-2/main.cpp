@@ -95,21 +95,21 @@ int main()
     std::cout << "We have: " << figure::get_nbr_figure() << " figures\n";
 
     /* TEST QUEUE */
-    circle ccl = circle(3.0f, "Blue");
-    equilateral_triangle eqt = equilateral_triangle(0.6f);
-    rectangle rcl = rectangle(0.4f, 0.6f);
+    circle *ccl = new circle(3.0f, "Blue");
+    equilateral_triangle *eqt = new equilateral_triangle(0.6f);
+    rectangle *rcl = new rectangle(0.4f, 0.6f);
 
     queue<figure *> q1;
-    q1.add_figure(&ccl);
+    q1.add_figure(ccl);
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
-    q1.add_figure(&eqt);
+    q1.add_figure(eqt);
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
-    q1.add_figure(&rcl);
+    q1.add_figure(rcl);
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
     q1.remove_cell();
     figure *queue_header = q1.get_queue_header();
     std::cout << "Queue header = expected ?\n";
-    if (queue_header == &ccl)
+    if (queue_header == ccl)
     {
         std::cout << "Yes\n";
     }
@@ -117,6 +117,10 @@ int main()
     {
         std::cout << "No\n";
     }
+    queue_header->print_characteristics();
+    perimeter = queue_header->perimeter();
+    print_perimeter(perimeter);
+
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
     q1.remove_cell();
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";

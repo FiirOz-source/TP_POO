@@ -119,10 +119,10 @@ class cell
 {
 public:
     cell();
-    cell(T *fig);
+    cell(T fig);
 
 private:
-    T *figure;
+    T figure;
     cell *next_cell;
     cell *previous_cell;
 
@@ -144,8 +144,8 @@ public:
     U get_queue_header();
 
 private:
-    cell<U> first_cell;
-    cell<U> last_cell;
+    cell<U> *first_cell;
+    cell<U> *last_cell;
     int nbr_cell;
 };
 

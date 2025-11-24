@@ -193,9 +193,9 @@ cell<T>::cell()
 }
 
 template <typename T>
-cell<T>::cell(T *fig)
+cell<T>::cell(T fig)
 {
-    fig = figure;
+    figure = fig;
 }
 
 template <typename T>
@@ -218,45 +218,41 @@ queue<T>::~queue()
 template <typename T>
 void queue<T>::add_figure(T f)
 {
-    cell<T> c = cell(f);
-    if (first_cell == nullptr)
+    cell<T> *nouvelle = new cell<T>(f);
+
+    if (!first_cell)
     {
-        first_cell = c;
-        last_cell = c;
-        nbr_cell++;
-    }
-    else if (last_cell != nullptr)
-    {
-        last_cell->next_cell = c;
-        c->previous_cell = last_cell;
-        last_cell = c;
-        nbr_cell++;
+        first_cell = last_cell = nouvelle;
     }
     else
     {
-        std::cout << "Error, queue corrupted\n";
+        last_cell->next_cell = nouvelle;
+        nouvelle->previous_cell = last_cell;
+        last_cell = nouvelle;
     }
+    ++nbr_cell;
 }
 
 template <typename T>
 void queue<T>::remove_cell()
 {
-    if (last_cell == nullptr)
-    {
-        std::cout << "Queue is already empty\n";
-    }
-    else if (last_cell->previous_cell == nullptr)
-    {
-        last_cell = nullptr;
-        first_cell = nullptr;
-        nbr_cell--;
-    }
-    else
+    if (!last_cell)
+        return;
+
+    cell<T> *temp = last_cell;
+
+    if (last_cell->previous_cell)
     {
         last_cell = last_cell->previous_cell;
         last_cell->next_cell = nullptr;
-        nbr_cell--;
     }
+    else
+    {
+        first_cell = last_cell = nullptr;
+    }
+
+    delete temp;
+    --nbr_cell;
 }
 
 template <typename T>
@@ -281,5 +277,7 @@ int queue<T>::get_nbr_cell()
 template <typename T>
 T queue<T>::get_queue_header()
 {
-    return first_cell.figure;
+    return first_cell ? first_cell->figure : nullptr;
 }
+
+template class queue<figure *>;
