@@ -185,25 +185,29 @@ std::string colorable::get_color()
     return color;
 }
 
-cell::cell()
+template <typename T>
+cell<T>::cell()
 {
     previous_cell = nullptr;
     next_cell = nullptr;
 }
-cell::cell(cell *next)
+
+template <typename T>
+cell<T>::cell(T *fig)
 {
-    previous_cell = nullptr;
-    next_cell = next;
+    fig = figure;
 }
 
-queue::queue(cell *first, cell *last, int nbr)
+template <typename T>
+queue<T>::queue()
 {
-    first_cell = first;
-    last_cell = last;
-    nbr_cell = nbr;
+    first_cell = nullptr;
+    last_cell = nullptr;
+    nbr_cell = 0;
 }
 
-queue::~queue()
+template <typename T>
+queue<T>::~queue()
 {
     for (int i = 0; i < nbr_cell; i++)
     {
@@ -211,32 +215,52 @@ queue::~queue()
     }
 }
 
-void queue::add_cell(cell *c)
+template <typename T>
+void queue<T>::add_figure(T f)
 {
-    last_cell->next_cell = c;
-    c->previous_cell = last_cell;
-    last_cell = c;
-    nbr_cell++;
-}
-void queue::remove_cell()
-{
-    if (last_cell->previous_cell == nullptr)
+    cell<T> c = cell(f);
+    if (first_cell == nullptr)
     {
-        cell *t = last_cell;
+        first_cell = c;
+        last_cell = c;
+        nbr_cell++;
+    }
+    else if (last_cell != nullptr)
+    {
+        last_cell->next_cell = c;
+        c->previous_cell = last_cell;
+        last_cell = c;
+        nbr_cell++;
+    }
+    else
+    {
+        std::cout << "Error, queue corrupted\n";
+    }
+}
+
+template <typename T>
+void queue<T>::remove_cell()
+{
+    if (last_cell == nullptr)
+    {
+        std::cout << "Queue is already empty\n";
+    }
+    else if (last_cell->previous_cell == nullptr)
+    {
         last_cell = nullptr;
         first_cell = nullptr;
-        free(t);
+        nbr_cell--;
     }
     else
     {
         last_cell = last_cell->previous_cell;
-        free(last_cell->next_cell);
         last_cell->next_cell = nullptr;
         nbr_cell--;
     }
 }
 
-int queue::is_queue_void(void)
+template <typename T>
+int queue<T>::is_queue_void(void)
 {
     if (last_cell == nullptr)
     {
@@ -247,12 +271,15 @@ int queue::is_queue_void(void)
         return 0;
     }
 }
-int queue::get_nbr_cell()
+
+template <typename T>
+int queue<T>::get_nbr_cell()
 {
     return nbr_cell;
 }
 
-cell *queue::get_queue_header()
+template <typename T>
+T queue<T>::get_queue_header()
 {
-    return first_cell;
+    return first_cell.figure;
 }

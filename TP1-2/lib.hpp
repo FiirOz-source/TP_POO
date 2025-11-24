@@ -114,34 +114,38 @@ protected:
     float radius;
 };
 
+template <typename T>
 class cell
 {
 public:
     cell();
-    cell(cell *next);
+    cell(T *fig);
 
 private:
+    T *figure;
     cell *next_cell;
     cell *previous_cell;
+
+    template <typename U>
     friend class queue;
 };
 
+template <typename U>
 class queue
 {
 public:
-    queue() = default;
-    queue(cell *first, cell *last, int nbr);
+    queue();
     ~queue();
 
-    void add_cell(cell *c);
+    void add_figure(U f);
     void remove_cell();
     int is_queue_void(void);
     int get_nbr_cell();
-    cell *get_queue_header();
+    U get_queue_header();
 
 private:
-    cell *first_cell;
-    cell *last_cell;
+    cell<U> first_cell;
+    cell<U> last_cell;
     int nbr_cell;
 };
 
