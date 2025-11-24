@@ -120,6 +120,8 @@ class cell
 public:
     cell();
     cell(T fig);
+    T get_figure() { return figure; }
+    cell *get_next_cell() { return next_cell; }
 
 private:
     T figure;
@@ -137,11 +139,18 @@ public:
     queue();
     ~queue();
 
+    class void_queue : public std::runtime_error
+    {
+    public:
+        void_queue() : std::runtime_error("Opération sur une pile vide !") {}
+    };
+
     void add_figure(U f);
     void remove_cell();
     int is_queue_void(void);
     int get_nbr_cell();
     U get_queue_header();
+    cell<U> *get_first_cell() const { return first_cell; }
 
 private:
     cell<U> *first_cell;

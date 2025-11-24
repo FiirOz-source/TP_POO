@@ -106,6 +106,31 @@ int main()
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
     q1.add_figure(rcl);
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
+
+    cell<figure *> *current = q1.get_first_cell();
+
+    int index = 1;
+    while (current != nullptr)
+    {
+        figure *fig = current->get_figure();
+
+        std::cout << "Figure " << index << " :\n";
+        fig->print_characteristics();
+        std::cout << "Périmètre = " << fig->perimeter() << " cm\n";
+        if (typeid(*fig) == typeid(circle))
+        {
+            circle *c = dynamic_cast<circle *>(fig);
+            if (c)
+            {
+                std::cout << "Couleur du cercle : " << c->get_color() << "\n";
+            }
+        }
+        std::cout << std::string(50, '-') << "\n";
+
+        current = current->get_next_cell();
+        ++index;
+    }
+
     q1.remove_cell();
     figure *queue_header = q1.get_queue_header();
     std::cout << "Queue header = expected ?\n";
@@ -117,9 +142,6 @@ int main()
     {
         std::cout << "No\n";
     }
-    queue_header->print_characteristics();
-    perimeter = queue_header->perimeter();
-    print_perimeter(perimeter);
 
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
     q1.remove_cell();
@@ -127,5 +149,7 @@ int main()
     q1.remove_cell();
     std::cout << "Queue size: " << q1.get_nbr_cell() << "\n";
     std::cout << "Queue empty: " << q1.is_queue_void() << "\n";
+    q1.remove_cell();
+
     return 0;
 }

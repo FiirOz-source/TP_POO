@@ -218,17 +218,17 @@ queue<T>::~queue()
 template <typename T>
 void queue<T>::add_figure(T f)
 {
-    cell<T> *nouvelle = new cell<T>(f);
+    cell<T> *new_c = new cell<T>(f);
 
     if (!first_cell)
     {
-        first_cell = last_cell = nouvelle;
+        first_cell = last_cell = new_c;
     }
     else
     {
-        last_cell->next_cell = nouvelle;
-        nouvelle->previous_cell = last_cell;
-        last_cell = nouvelle;
+        last_cell->next_cell = new_c;
+        new_c->previous_cell = last_cell;
+        last_cell = new_c;
     }
     ++nbr_cell;
 }
@@ -237,7 +237,10 @@ template <typename T>
 void queue<T>::remove_cell()
 {
     if (!last_cell)
+    {
+        throw void_queue();
         return;
+    };
 
     cell<T> *temp = last_cell;
 
@@ -277,7 +280,11 @@ int queue<T>::get_nbr_cell()
 template <typename T>
 T queue<T>::get_queue_header()
 {
-    return first_cell ? first_cell->figure : nullptr;
+    if (!first_cell)
+    {
+        throw void_queue();
+    }
+    return first_cell->figure;
 }
 
 template class queue<figure *>;
